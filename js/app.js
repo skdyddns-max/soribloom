@@ -3,7 +3,7 @@
   const $ = s => document.querySelector(s);
   const W = window.SB_WORDS, PAIRS = window.SB_PAIRS, PH = window.SB_PHRASES, JAMO = window.SB_JAMO;
   const pairById = Object.fromEntries(PAIRS.map(p => [p.id, p]));
-  const V = 'v=' + (window.SB_VER || '1');
+  const V = 'v=' + (typeof SB_VER !== 'undefined' ? SB_VER : '1');
 
   /* ---------- 설정 로드(URL 해시 → 서버 → 기본) ---------- */
   const qs = new URLSearchParams(location.search);
@@ -149,7 +149,7 @@
     const byPair = {};
     log.forEach(r => { const b = byPair[r.pair] || (byPair[r.pair] = { n: 0, first: 0, second: 0 }); b.n++; if (r.first) b.first++; else if (r.second) b.second++; });
     const first = log.filter(r => r.first).length, second = log.filter(r => !r.first && r.second).length;
-    return { code: config.code, nick: config.nick || '', at: new Date().toISOString(), n: log.length, first, second, pct: Math.round(first / log.length * 100), items: log, byPair, ver: window.SB_VER };
+    return { code: config.code, nick: config.nick || '', at: new Date().toISOString(), n: log.length, first, second, pct: Math.round(first / log.length * 100), items: log, byPair, ver: (typeof SB_VER !== 'undefined' ? SB_VER : '1') };
   }
   async function finish() {
     const s = summarize(); show('end');

@@ -1,7 +1,7 @@
 /* 소리블룸 저장 계층 — Supabase REST + localStorage 캐시/아웃박스
  * 서버가 꺼져 있어도(일시중지·오프라인) 앱은 동작하고, 결과는 아웃박스에 쌓였다가 다음 기회에 전송된다. */
 window.SBStore = (function () {
-  const cfg = window.SUPABASE_CONFIG || {};
+  const cfg = (typeof SUPABASE_CONFIG !== 'undefined' && SUPABASE_CONFIG) || window.SUPABASE_CONFIG || {};
   const enabled = !!(cfg.url && cfg.anonKey && !/xxxx/.test(cfg.url));
   const LS = {
     children: 'sb.children',   // 선생님 화면 로컬 캐시 {code: config}
