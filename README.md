@@ -28,7 +28,7 @@ bash run.sh   # http://localhost:8090
 
 ## 선생님 PIN
 
-기본 PIN **1234**. 바꾸려면 `./rebuild/pin.sh 새PIN` 출력값을 `js/config.js`의 `TEACHER_PIN_HASH`에 넣는다.
+PIN은 `rebuild/PIN.txt`(git 제외)에 있음. 바꾸려면 `./rebuild/pin.sh 새PIN` 출력값을 `js/config.js`의 `TEACHER_PIN_HASH`에 넣는다.
 
 ## Supabase
 

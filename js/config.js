@@ -12,7 +12,7 @@ const SUPABASE_CONFIG = {
 const BRAND = { name: '소리블룸', en: 'SoriBloom', emoji: '🌱' };
 
 /* 선생님 화면 PIN — SHA-256 해시. 기본 PIN 은 README 참고, 바꾸려면 rebuild/pin.sh 로 해시 생성 */
-const TEACHER_PIN_HASH = '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4';
+const TEACHER_PIN_HASH = 'd8b81dc69b28524f9936c4de2d100b827b68ce8225bb1815e51b94ab2be98b8b';
 
 /* 연습 기본값 */
 const SB_DEFAULTS = { n: 10, retry: true, showText: true, showJamo: true };
