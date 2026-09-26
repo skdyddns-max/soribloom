@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>소리블룸 — 선생님</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#173F2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+<header class="band">
+  <div class="inner">
+    <span style="font-size:22px">🌱</span>
+    <div><h1>소리블룸 · 선생님</h1><div class="sub">아동별 목표 설정 → 링크 발송 → 결과 확인</div></div>
+    <span class="spacer"></span>
+    <span id="online" class="sub"></span>
+    <a href="index.html">체험 열기 ↗</a>
+  </div>
+</header>
+
+<main class="wrap wide">
+
+  <!-- PIN -->
+  <section id="t-pin" class="hidden">
+    <div class="card" style="max-width:380px;margin:40px auto">
+      <h2>비밀번호</h2>
+      <form id="pinform">
+        <label class="field"><span>선생님 PIN</span><input type="password" id="pin" inputmode="numeric" autocomplete="off" autofocus></label>
+        <button class="btn block" type="submit">들어가기</button>
+        <p id="pinerr" class="muted" style="color:var(--danger);margin-top:8px"></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="t-main" class="hidden">
+    <div class="tabs">
+      <button data-tab="list" class="on">아동 목록</button>
+      <button data-tab="new">＋ 새 아동</button>
+      <button data-tab="detail" id="tab-detail" class="hidden">상세</button>
+    </div>
+    <div id="netnotice"></div>
+
+    <!-- 목록 -->
+    <div id="tab-list">
+      <div class="card white">
+        <div class="row between"><h2 style="margin:0">아동 목록</h2><button class="btn ghost sm" id="refresh">새로고침</button></div>
+        <div id="children" class="list" style="margin-top:12px"></div>
+      </div>
+    </div>
+
+    <!-- 새 아동 / 편집 -->
+    <div id="tab-new" class="hidden">
+      <div class="card white">
+        <h2 id="formtitle">새 아동</h2>
+        <label class="field"><span>아이 별칭(이름 대신 별칭·이니셜 권장)</span><input type="text" id="nick" placeholder="예: 지후, ㄱㅊㅇ" maxlength="12"></label>
+        <div class="row" style="margin-bottom:12px">
+          <label class="field" style="flex:1;min-width:140px"><span>한 세트 문항 수</span>
+            <select id="n"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></label>
+          <label class="chk" style="flex:1"><input type="checkbox" id="retry" checked><span>오답 시 다시 듣고 재시도 1회</span></label>
+        </div>
+        <div class="row" style="margin-bottom:12px">
+          <label class="chk" style="flex:1"><input type="checkbox" id="showText" checked><span>그림 아래 글자 표시</span></label>
+          <label class="chk" style="flex:1"><input type="checkbox" id="showJamo" checked><span>자모 칩(받침 색 강조) 표시</span></label>
+        </div>
+        <h3>목표 대립쌍</h3>
+        <p class="muted">그룹을 체크하면 그 그룹의 쌍이 모두 선택돼요. 쌍을 개별로 빼거나 넣을 수 있어요.</p>
+        <h3 style="margin-top:12px;font-size:15px;color:var(--ink-muted)">받침(종성) 유무</h3>
+        <div id="groups-jong"></div>
+        <h3 style="margin-top:12px;font-size:15px;color:var(--ink-muted)">초성 대립</h3>
+        <div id="groups-cho"></div>
+        <p class="muted" id="selcount"></p>
+        <div class="row" style="margin-top:12px">
+          <button class="btn" id="save">저장하고 링크 만들기</button>
+          <button class="btn ghost" id="cancel">취소</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 상세 -->
+    <div id="tab-detail-body" class="hidden">
+      <div class="card white">
+        <div class="row between">
+          <h2 id="d-title" style="margin:0"></h2>
+          <div class="row"><button class="btn ghost sm" id="edit">목표 수정</button><button class="btn ghost sm" id="del" style="color:var(--danger)">삭제</button></div>
+        </div>
+        <p class="muted" id="d-meta"></p>
+        <div id="d-targets" class="row" style="margin:8px 0"></div>
+        <h3 style="margin-top:14px">부모님께 보낼 링크</h3>
+        <div class="linkbox"><input type="text" id="d-link" readonly><button class="btn sm" id="copy">복사</button></div>
+        <div class="row" style="margin-top:8px"><button class="btn ghost sm" id="share">공유…</button><button class="btn ghost sm" id="preview">미리보기 ↗</button><button class="btn ghost sm" id="copymsg">안내 문구 복사</button></div>
+        <div class="qr" id="qr"></div>
+      </div>
+      <div class="card white">
+        <div class="row between"><h2 style="margin:0">연습 기록</h2><span class="muted" id="d-count"></span></div>
+        <div id="d-trend" class="trend" style="margin:10px 0"></div>
+        <h3>대립쌍별 누적 정확도</h3>
+        <table class="pairs" id="d-pairs"></table>
+        <h3 style="margin-top:14px">세션</h3>
+        <div class="sessions" id="d-sessions"></div>
+      </div>
+    </div>
+  </section>
+</main>
+<div class="toast" id="toast"></div>
+<script src="js/qrcode.min.js?v=1"></script>
+<script src="js/config.js?v=1"></script>
+<script src="js/words.js?v=1"></script>
+<script src="js/store.js?v=1"></script>
+<script src="js/teacher.js?v=1"></script>
+</body>
+</html>

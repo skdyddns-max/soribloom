@@ -1,0 +1,262 @@
+{
+ "mu": {
+  "text": "무",
+  "reg": "stim"
+ },
+ "muk": {
+  "text": "묵",
+  "reg": "stim"
+ },
+ "gu": {
+  "text": "구",
+  "reg": "stim"
+ },
+ "guk": {
+  "text": "국",
+  "reg": "stim"
+ },
+ "sae": {
+  "text": "새",
+  "reg": "stim"
+ },
+ "saek": {
+  "text": "색",
+  "reg": "stim"
+ },
+ "so": {
+  "text": "소",
+  "reg": "stim"
+ },
+ "son": {
+  "text": "손",
+  "reg": "stim"
+ },
+ "sa": {
+  "text": "사",
+  "reg": "stim"
+ },
+ "san": {
+  "text": "산",
+  "reg": "stim"
+ },
+ "mun": {
+  "text": "문",
+  "reg": "stim"
+ },
+ "o": {
+  "text": "오",
+  "reg": "stim"
+ },
+ "ot": {
+  "text": "옷",
+  "reg": "stim"
+ },
+ "bi": {
+  "text": "비",
+  "reg": "stim"
+ },
+ "bit": {
+  "text": "빗",
+  "reg": "stim"
+ },
+ "sot": {
+  "text": "솥",
+  "reg": "stim"
+ },
+ "pa": {
+  "text": "파",
+  "reg": "stim"
+ },
+ "pat": {
+  "text": "팥",
+  "reg": "stim"
+ },
+ "sol": {
+  "text": "솔",
+  "reg": "stim"
+ },
+ "mul": {
+  "text": "물",
+  "reg": "stim"
+ },
+ "pal": {
+  "text": "팔",
+  "reg": "stim"
+ },
+ "gul": {
+  "text": "굴",
+  "reg": "stim"
+ },
+ "bae": {
+  "text": "배",
+  "reg": "stim"
+ },
+ "baem": {
+  "text": "뱀",
+  "reg": "stim"
+ },
+ "som": {
+  "text": "솜",
+  "reg": "stim"
+ },
+ "sam": {
+  "text": "삼",
+  "reg": "stim"
+ },
+ "bap": {
+  "text": "밥",
+  "reg": "stim"
+ },
+ "i": {
+  "text": "이",
+  "reg": "stim"
+ },
+ "ip": {
+  "text": "입",
+  "reg": "stim"
+ },
+ "sap": {
+  "text": "삽",
+  "reg": "stim"
+ },
+ "ko": {
+  "text": "코",
+  "reg": "stim"
+ },
+ "kong": {
+  "text": "콩",
+  "reg": "stim"
+ },
+ "sang": {
+  "text": "상",
+  "reg": "stim"
+ },
+ "byeo": {
+  "text": "벼",
+  "reg": "stim"
+ },
+ "byeong": {
+  "text": "병",
+  "reg": "stim"
+ },
+ "dul": {
+  "text": "둘",
+  "reg": "stim"
+ },
+ "gam": {
+  "text": "감",
+  "reg": "stim"
+ },
+ "dam": {
+  "text": "담",
+  "reg": "stim"
+ },
+ "tong": {
+  "text": "통",
+  "reg": "stim"
+ },
+ "kal": {
+  "text": "칼",
+  "reg": "stim"
+ },
+ "tal": {
+  "text": "탈",
+  "reg": "stim"
+ },
+ "dol": {
+  "text": "돌",
+  "reg": "stim"
+ },
+ "don": {
+  "text": "돈",
+  "reg": "stim"
+ },
+ "tang": {
+  "text": "탕",
+  "reg": "stim"
+ },
+ "jul": {
+  "text": "줄",
+  "reg": "stim"
+ },
+ "ja": {
+  "text": "자",
+  "reg": "stim"
+ },
+ "cha": {
+  "text": "차",
+  "reg": "stim"
+ },
+ "jong": {
+  "text": "종",
+  "reg": "stim"
+ },
+ "chong": {
+  "text": "총",
+  "reg": "stim"
+ },
+ "bul": {
+  "text": "불",
+  "reg": "stim"
+ },
+ "pul": {
+  "text": "풀",
+  "reg": "stim"
+ },
+ "bal": {
+  "text": "발",
+  "reg": "stim"
+ },
+ "dal": {
+  "text": "달",
+  "reg": "stim"
+ },
+ "ttal": {
+  "text": "딸",
+  "reg": "stim"
+ },
+ "kkul": {
+  "text": "꿀",
+  "reg": "stim"
+ },
+ "bang": {
+  "text": "방",
+  "reg": "stim"
+ },
+ "ppang": {
+  "text": "빵",
+  "reg": "stim"
+ },
+ "sal": {
+  "text": "살",
+  "reg": "stim"
+ },
+ "ssal": {
+  "text": "쌀",
+  "reg": "stim"
+ },
+ "p-intro": {
+  "text": "잘 듣고 골라 보세요.",
+  "reg": "talk"
+ },
+ "p-listen": {
+  "text": "잘 들어 보세요.",
+  "reg": "talk"
+ },
+ "p-correct": {
+  "text": "맞았어요! 잘했어요.",
+  "reg": "talk"
+ },
+ "p-retry": {
+  "text": "다시 한번 들어 볼까요?",
+  "reg": "talk"
+ },
+ "p-reveal": {
+  "text": "정답은 이거예요.",
+  "reg": "talk"
+ },
+ "p-done": {
+  "text": "다 했어요! 정말 잘했어요.",
+  "reg": "talk"
+ }
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>소리블룸 — 소리 듣고 고르기</title>
+<meta name="description" content="종성·초성 대립쌍을 듣고 그림을 고르는 조음 변별 홈워크">
+<meta name="theme-color" content="#173F2B">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+<main class="practice">
+
+  <!-- 시작 -->
+  <section id="s-start" class="hidden">
+    <div class="hero">
+      <div class="logo">🌱🔊</div>
+      <h1>소리블룸</h1>
+      <p class="muted">소리 듣고 그림 고르기</p>
+    </div>
+    <div class="card">
+      <h2 id="greet">잘 듣고 골라 보자!</h2>
+      <p id="setinfo" class="muted"></p>
+      <div id="targets" class="row" style="margin:8px 0 12px"></div>
+      <div id="history"></div>
+      <button class="btn big block" id="btn-start">▶ 시작하기</button>
+    </div>
+    <div id="demo" class="notice hidden">체험 모드로 열렸어요(받침 유무 전체). 선생님이 보낸 링크로 열면 아이 맞춤 목표로 연습해요.</div>
+    <div class="card" style="margin-top:14px">
+      <h3>부모님께</h3>
+      <p class="muted" style="margin:0">① 조용한 곳에서 소리를 켜 주세요. ② 아이가 소리를 듣고 그림을 누르게 해 주세요. ③ 틀려도 괜찮아요. 두 단어를 다시 들려주고 한 번 더 기회를 줘요. ④ 끝나면 결과가 선생님께 자동으로 전달돼요.</p>
+    </div>
+  </section>
+
+  <!-- 연습 -->
+  <section id="s-play" class="hidden">
+    <div class="row between" style="margin-bottom:4px">
+      <span class="chip wash" id="counter">1 / 10</span>
+      <span class="muted">🌱 소리블룸</span>
+    </div>
+    <div class="progress" id="progress"></div>
+    <button class="speaker" id="speaker" aria-label="다시 듣기"></button>
+    <div class="choices" id="choices"></div>
+    <div class="hint" id="hint"></div>
+  </section>
+
+  <!-- 결과 -->
+  <section id="s-end" class="hidden">
+    <div class="hero">
+      <div class="logo">🎉</div>
+      <h1>다 했어요!</h1>
+    </div>
+    <div class="card">
+      <div class="score" id="score">0 / 10</div>
+      <div class="stars" id="stars"></div>
+      <p id="endmsg" style="text-align:center;font-weight:700;margin-top:8px"></p>
+      <table class="pairs" id="pairtable"></table>
+      <p class="muted" style="margin-top:6px">처음에 맞힌 수 기준 · (+n)은 다시 듣고 맞힌 수</p>
+    </div>
+    <div id="sync"></div>
+    <div class="row center" style="margin-top:16px">
+      <button class="btn big" id="btn-again">🔁 한 번 더</button>
+      <button class="btn ghost" id="btn-home">처음으로</button>
+    </div>
+  </section>
+
+</main>
+<div class="toast" id="toast"></div>
+<script src="js/config.js?v=1"></script>
+<script src="js/words.js?v=1"></script>
+<script src="js/store.js?v=1"></script>
+<script src="js/app.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+✅ mu         무              0.77s
+✅ muk        묵              0.88s
+✅ gu         구              0.51s
+✅ guk        국              0.88s
+✅ sae        새              0.65s
+✅ saek       색              0.89s
+✅ so         소              0.52s
+✅ son        손              0.93s
+✅ sa         사              0.79s
+✅ san        산              0.89s
+✅ mun        문              1.05s
+✅ o          오              0.73s
+✅ ot         옷              0.55s
+✅ bi         비              0.77s
+✅ bit        빗              0.52s
+✅ sot        솥              0.89s
+✅ pa         파              0.65s
+✅ pat        팥              0.92s
+✅ sol        솔              0.94s
+✅ mul        물              1.01s
+✅ pal        팔              0.88s
+✅ gul        굴              0.83s
+✅ bae        배              0.77s
+✅ baem       뱀              0.92s
+✅ som        솜              0.87s
+✅ sam        삼              0.90s
+✅ bap        밥              0.97s
+✅ i          이              0.68s
+✅ ip         입              0.77s
+✅ sap        삽              0.83s
+✅ ko         코              0.57s
+✅ kong       콩              1.00s
+✅ sang       상              0.92s
+✅ byeo       벼              0.96s
+✅ byeong     병              1.03s
+✅ dul        둘              0.87s
+✅ gam        감              0.85s
+✅ dam        담              0.95s
+✅ tong       통              1.01s
+✅ kal        칼              0.83s
+✅ tal        탈              0.64s
+✅ dol        돌              0.86s
+✅ don        돈              0.98s
+✅ tang       탕              0.97s
+✅ jul        줄              0.83s
+✅ ja         자              0.73s
+✅ cha        차              0.74s
+✅ jong       종              0.90s
+✅ chong      총              0.79s
+✅ bul        불              0.89s
+✅ pul        풀              1.01s
+✅ bal        발              0.94s
+✅ dal        달              0.83s
+✅ ttal       딸              0.97s
+✅ kkul       꿀              0.91s
+✅ bang       방              1.11s
+✅ ppang      빵              0.84s
+✅ sal        살              0.86s
+✅ ssal       쌀              0.77s
+✅ p-intro    잘 듣고 골라 보세요.   1.35s
+✅ p-listen   잘 들어 보세요.      0.94s
+✅ p-correct  맞았어요! 잘했어요.    1.57s
+✅ p-retry    다시 한번 들어 볼까요?  1.20s
+✅ p-reveal   정답은 이거예요.      1.23s
+✅ p-done     다 했어요! 정말 잘했어요. 2.03s
+
+완료 65 / 실패 0
