@@ -1,5 +1,5 @@
 /* 소리블룸 설정 */
-const SB_VER = '2';   // 정적 자산 캐시 버스터(index.html ?v= 와 sw.js VERSION 과 함께 올릴 것)
+const SB_VER = '3';   // 정적 자산 캐시 버스터(index.html ?v= 와 sw.js VERSION 과 함께 올릴 것)
 
 /* Supabase(공유 프로젝트: 키토냉장고·핏메이트·알말카와 동일) — 비어 있으면 로컬 저장만 */
 const SUPABASE_CONFIG = {

@@ -39,36 +39,54 @@
   /* ---------- 문항 구성 ---------- */
   function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
   function buildItems() {
-    const n = +config.n || 10; const items = []; let side = Math.random() < .5;
+    // 쌍을 한 바퀴씩 고르게 돈다(바퀴마다 순서 섞기, 같은 쌍 연속 금지). 쌍 안에서는 두 단어를 번갈아 목표로 삼아 균형을 맞춘다.
+    const n = +config.n || 10; const ids = shuffle([...config.pairs]);
+    const left = {}, side = {}; ids.forEach((id, i) => { left[id] = Math.floor(n / ids.length) + (i < n % ids.length ? 1 : 0); side[id] = Math.random() < .5; });
+    const items = [];
     while (items.length < n) {
-      for (const id of shuffle([...config.pairs])) {
-        if (items.length >= n) break;
-        const p = pairById[id]; const target = side ? p.a : p.b; side = !side;
-        if (items.length && items[items.length - 1].pair === id && config.pairs.length > 1) continue;
-        items.push({ pair: id, target, other: target === p.a ? p.b : p.a, left: Math.random() < .5 ? p.a : p.b });
+      const round = shuffle(ids.filter(id => left[id] > 0)); if (!round.length) break;
+      if (items.length && round.length > 1 && round[0] === items[items.length - 1].pair) [round[0], round[1]] = [round[1], round[0]];
+      for (const id of round) {
+        const p = pairById[id]; const target = side[id] ? p.a : p.b; side[id] = !side[id]; left[id]--;
+        const it = { pair: id, target, other: target === p.a ? p.b : p.a, left: Math.random() < .5 ? p.a : p.b };
+        if (items.length && items[items.length - 1].pair === id) {   // 마지막 바퀴에 한 쌍만 남은 경우: 앞쪽 빈자리에 끼워 넣기
+          let j = items.length - 1; while (j > 0 && (items[j].pair === id || items[j - 1].pair === id)) j--;
+          items.splice(j, 0, it);
+        } else items.push(it);
       }
     }
     return items;
   }
 
   /* ---------- 렌더 ---------- */
-  function diffIndex(pair) { const a = JAMO(pair.a), b = JAMO(pair.b); for (let i = 0; i < 3; i++) if (a[i] !== b[i]) return i; return 2; }
+  // 두 단어의 첫 차이 위치 [음절, 자모(0초성·1중성·2종성)]
+  function diffPos(pair) {
+    for (let k = 0; k < Math.max(pair.a.length, pair.b.length); k++) {
+      const a = JAMO(pair.a[k] || ' '), b = JAMO(pair.b[k] || ' ');
+      for (let i = 0; i < 3; i++) if (a[i] !== b[i]) return [k, i];
+    }
+    return [0, 2];
+  }
   function picHTML(w) {
     const d = W[w];
     if (d.number != null) return `<span class="num">${d.number}</span>`;
     return `<img src="img/${d.img}.jpg?${V}" alt="${w}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${d.emoji}'}))">`;
   }
   function jamoHTML(w, pair) {
-    const j = JAMO(w), di = diffIndex(pair);
-    return '<div class="jamo">' + j.map((c, i) => {
-      if (i === 2 && !c) return `<i class="${di === 2 ? 'none hl' : 'none'}">·</i>`;
-      return `<i class="${i === di ? 'hl' : ''}">${c}</i>`;
+    const [dk, di] = diffPos(pair), multi = w.length > 1;
+    return '<div class="jamo">' + [...w].map((ch, k) => {
+      const j = JAMO(ch);
+      return '<span class="syl">' + j.map((c, i) => {
+        const hl = k === dk && i === di;
+        if (i === 2 && !c) return (hl || !multi) ? `<i class="${hl ? 'none hl' : 'none'}">·</i>` : '';
+        return `<i class="${hl ? 'hl' : ''}">${c}</i>`;
+      }).join('') + '</span>';
     }).join('') + '</div>';
   }
   function choiceHTML(w, pair) {
     return `<button class="choice" data-w="${w}" aria-label="${w}">
       <div class="pic">${picHTML(w)}</div>
-      ${config.showText ? `<div class="word">${w}</div>` : ''}
+      ${config.showText ? `<div class="word${w.length > 1 ? ' long' : ''}">${w}</div>` : ''}
       ${config.showText && config.showJamo ? jamoHTML(w, pair) : ''}
     </button>`;
   }
@@ -81,6 +99,7 @@
   const SPK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>`;
 
   function renderProgress() {
+    $('#progress').classList.toggle('many', items.length > 20);
     $('#progress').innerHTML = items.map((it, i) => {
       const r = log[i]; let cls = i === idx ? 'cur' : '';
       if (r) cls += r.first ? ' ok' : (r.second ? ' half' : ' bad');
@@ -142,7 +161,21 @@
     renderProgress(); await play(PH.reveal.file); await wait(150); await play(W[it.target].img); await wait(500);
     attempt = 0; next();
   }
-  function next() { idx++; if (idx >= items.length) finish(); else trial(); }
+  async function next() {
+    idx++;
+    if (idx >= items.length) return finish();
+    if (items.length >= 30 && idx === Math.floor(items.length / 2)) await halfBreak();
+    trial();
+  }
+  function halfBreak() {
+    return new Promise(res => {
+      renderProgress(); $('#choices').innerHTML = ''; $('#hint').textContent = '';
+      $('#break').classList.remove('hidden'); $('#speaker').classList.add('hidden');
+      $('#break-score').textContent = `지금까지 ${log.filter(r => r.first).length} / ${idx} 맞혔어요`;
+      play(PH.half.file);
+      $('#btn-continue').onclick = () => { $('#break').classList.add('hidden'); $('#speaker').classList.remove('hidden'); res(); };
+    });
+  }
 
   /* ---------- 결과 ---------- */
   function summarize() {

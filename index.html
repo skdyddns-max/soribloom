@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="stylesheet" href="css/style.css?v=2">
+<link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
 <main class="practice">
@@ -45,6 +45,13 @@
     </div>
     <div class="progress" id="progress"></div>
     <button class="speaker" id="speaker" aria-label="다시 듣기"></button>
+    <div id="break" class="card hidden" style="text-align:center">
+      <div style="font-size:56px;line-height:1">🌟</div>
+      <h2>벌써 절반 했어요!</h2>
+      <p id="break-score" class="muted"></p>
+      <p>물 한 모금 마시고, 준비되면 눌러 주세요.</p>
+      <button class="btn big" id="btn-continue">▶ 계속하기</button>
+    </div>
     <div class="choices" id="choices"></div>
     <div class="hint" id="hint"></div>
   </section>
@@ -71,9 +78,9 @@
 
 </main>
 <div class="toast" id="toast"></div>
-<script src="js/config.js?v=2"></script>
-<script src="js/words.js?v=2"></script>
-<script src="js/store.js?v=2"></script>
-<script src="js/app.js?v=2"></script>
+<script src="js/config.js?v=3"></script>
+<script src="js/words.js?v=3"></script>
+<script src="js/store.js?v=3"></script>
+<script src="js/app.js?v=3"></script>
 </body>
 </html>

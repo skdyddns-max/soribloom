@@ -211,6 +211,50 @@
   "word": "살",
   "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child's chubby cheek being gently pinched, close-up"
  },
+ "jam": {
+  "word": "잠",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a young child sleeping peacefully in bed under a blanket"
+ },
+ "jaem": {
+  "word": "잼",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a glass jar of red strawberry jam with a spoon"
+ },
+ "daem": {
+  "word": "댐",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a large concrete dam holding back a lake, water flowing through gates, daytime"
+ },
+ "jwi": {
+  "word": "쥐",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a small cute gray mouse, full body"
+ },
+ "dwi": {
+  "word": "뒤",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child standing seen from behind, back view of head and body"
+ },
+ "jokki": {
+  "word": "조끼",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child's padded puffer vest, sleeveless, laid flat"
+ },
+ "dokki": {
+  "word": "도끼",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: an axe with a wooden handle"
+ },
+ "jari": {
+  "word": "자리",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: an empty picnic mat spread flat on green grass"
+ },
+ "dari": {
+  "word": "다리",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child's two legs standing, shown from the hips down to bare feet, wearing shorts"
+ },
+ "janggu": {
+  "word": "장구",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a traditional Korean hourglass drum (janggu) with drumsticks"
+ },
+ "danggu": {
+  "word": "당구",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a billiard table with colorful balls and a cue stick"
+ },
  "ssal": {
   "word": "쌀",
   "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a pile of uncooked white rice grains"

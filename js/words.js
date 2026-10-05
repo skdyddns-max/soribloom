@@ -16,7 +16,8 @@ window.SB_GROUPS = {
   cho: [
     { id: 'front', label: '연구개음 전방화 (ㄱ·ㅋ → ㄷ·ㅌ)', desc: '굴/둘 · 감/담 · 콩/통 · 칼/탈' },
     { id: 'stop',  label: '마찰음 파열음화 (ㅅ → ㄷ·ㅌ)', desc: '솔/돌 · 손/돈 · 상/탕' },
-    { id: 'affr',  label: '파찰음 (ㅈ → ㄷ, ㅈ/ㅊ)', desc: '줄/둘 · 자/차 · 종/총' },
+    { id: 'jd',    label: 'ㅈ / ㄷ 변별 (파찰음 파열음화)', desc: '줄/둘 · 잠/담 · 잼/댐 · 쥐/뒤 · 조끼/도끼 · 자리/다리 · 장구/당구' },
+    { id: 'affr',  label: 'ㅈ / ㅊ 대립', desc: '자/차 · 종/총' },
     { id: 'asp',   label: '기식·긴장 대립', desc: '불/풀 · 발/팔 · 달/딸 · 굴/꿀 · 방/빵 · 살/쌀' },
   ],
 };
@@ -81,6 +82,17 @@ window.SB_WORDS = {
   '방': { img: 'bang',  emoji: '🛏️', prompt: P + "a cozy child's bedroom with a bed and window" },
   '빵': { img: 'ppang', emoji: '🍞', prompt: P + 'a loaf of soft bread on a wooden board' },
   '살': { img: 'sal',   emoji: '🤏', prompt: P + "a child's chubby cheek being gently pinched, close-up" },
+  '잠': { img: 'jam',   emoji: '😴', prompt: P + 'a young child sleeping peacefully in bed under a blanket' },
+  '잼': { img: 'jaem',  emoji: '🍓', prompt: P + 'a glass jar of red strawberry jam with a spoon' },
+  '댐': { img: 'daem',  emoji: '🌊', prompt: P + 'a large concrete dam holding back a lake, water flowing through gates, daytime' },
+  '쥐': { img: 'jwi',   emoji: '🐭', prompt: P + 'a small cute gray mouse, full body' },
+  '뒤': { img: 'dwi',   emoji: '🔙', prompt: P + 'a child standing seen from behind, back view of head and body' },
+  '조끼': { img: 'jokki', emoji: '🦺', prompt: P + "a child's padded puffer vest, sleeveless, laid flat" },
+  '도끼': { img: 'dokki', emoji: '🪓', prompt: P + 'an axe with a wooden handle' },
+  '자리': { img: 'jari',  emoji: '🧺', prompt: P + 'an empty picnic mat spread flat on green grass' },
+  '다리': { img: 'dari',  emoji: '🦵', prompt: P + "a child's two legs standing, shown from the hips down to bare feet, wearing shorts" },
+  '장구': { img: 'janggu', emoji: '🥁', prompt: P + 'a traditional Korean hourglass drum (janggu) with drumsticks' },
+  '당구': { img: 'danggu', emoji: '🎱', prompt: P + 'a billiard table with colorful balls and a cue stick' },
   '쌀': { img: 'ssal',  emoji: '🌾', prompt: P + 'a pile of uncooked white rice grains' },
 };
 
@@ -117,7 +129,13 @@ window.SB_PAIRS = [
   { id: 'sol-dol',  kind: 'cho', group: 'stop',  a: '솔', b: '돌' },
   { id: 'son-don',  kind: 'cho', group: 'stop',  a: '손', b: '돈' },
   { id: 'sang-tang',kind: 'cho', group: 'stop',  a: '상', b: '탕' },
-  { id: 'jul-dul',  kind: 'cho', group: 'affr',  a: '줄', b: '둘' },
+  { id: 'jul-dul',  kind: 'cho', group: 'jd',    a: '줄', b: '둘' },
+  { id: 'jam-dam',  kind: 'cho', group: 'jd',    a: '잠', b: '담' },
+  { id: 'jaem-daem',kind: 'cho', group: 'jd',    a: '잼', b: '댐' },
+  { id: 'jwi-dwi',  kind: 'cho', group: 'jd',    a: '쥐', b: '뒤' },
+  { id: 'jokki-dokki', kind: 'cho', group: 'jd', a: '조끼', b: '도끼' },
+  { id: 'jari-dari',   kind: 'cho', group: 'jd', a: '자리', b: '다리' },
+  { id: 'janggu-danggu', kind: 'cho', group: 'jd', a: '장구', b: '당구' },
   { id: 'ja-cha',   kind: 'cho', group: 'affr',  a: '자', b: '차' },
   { id: 'jong-chong',kind:'cho', group: 'affr',  a: '종', b: '총' },
   { id: 'bul-pul',  kind: 'cho', group: 'asp',   a: '불', b: '풀' },
@@ -135,6 +153,7 @@ window.SB_PHRASES = {
   correct: { file: 'p-correct', text: '맞았어요! 잘했어요.' },
   retry:   { file: 'p-retry',   text: '다시 한번 들어 볼까요?' },
   reveal:  { file: 'p-reveal',  text: '정답은 이거예요.' },
+  half:    { file: 'p-half',    text: '벌써 절반 했어요! 조금만 더 해 봐요.' },
   done:    { file: 'p-done',    text: '다 했어요! 정말 잘했어요.' },
 };
 

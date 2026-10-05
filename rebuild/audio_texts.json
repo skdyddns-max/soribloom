@@ -231,6 +231,50 @@
   "text": "살",
   "reg": "stim"
  },
+ "jam": {
+  "text": "잠",
+  "reg": "stim"
+ },
+ "jaem": {
+  "text": "잼",
+  "reg": "stim"
+ },
+ "daem": {
+  "text": "댐",
+  "reg": "stim"
+ },
+ "jwi": {
+  "text": "쥐",
+  "reg": "stim"
+ },
+ "dwi": {
+  "text": "뒤",
+  "reg": "stim"
+ },
+ "jokki": {
+  "text": "조끼",
+  "reg": "stim"
+ },
+ "dokki": {
+  "text": "도끼",
+  "reg": "stim"
+ },
+ "jari": {
+  "text": "자리",
+  "reg": "stim"
+ },
+ "dari": {
+  "text": "다리",
+  "reg": "stim"
+ },
+ "janggu": {
+  "text": "장구",
+  "reg": "stim"
+ },
+ "danggu": {
+  "text": "당구",
+  "reg": "stim"
+ },
  "ssal": {
   "text": "쌀",
   "reg": "stim"
@@ -253,6 +297,10 @@
  },
  "p-reveal": {
   "text": "정답은 이거예요.",
+  "reg": "talk"
+ },
+ "p-half": {
+  "text": "벌써 절반 했어요! 조금만 더 해 봐요.",
   "reg": "talk"
  },
  "p-done": {
