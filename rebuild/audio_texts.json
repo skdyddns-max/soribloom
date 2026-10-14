@@ -275,6 +275,46 @@
   "text": "당구",
   "reg": "stim"
  },
+ "juk": {
+  "text": "죽",
+  "reg": "stim"
+ },
+ "duk": {
+  "text": "둑",
+  "reg": "stim"
+ },
+ "jollyeoyo": {
+  "text": "졸려요",
+  "reg": "stim"
+ },
+ "dollyeoyo": {
+  "text": "돌려요",
+  "reg": "stim"
+ },
+ "jobayo": {
+  "text": "좁아요",
+  "reg": "stim"
+ },
+ "dobayo": {
+  "text": "돕아요",
+  "reg": "stim"
+ },
+ "jwoyo": {
+  "text": "줘요",
+  "reg": "stim"
+ },
+ "dwoyo": {
+  "text": "둬요",
+  "reg": "stim"
+ },
+ "jaeyo": {
+  "text": "재요",
+  "reg": "stim"
+ },
+ "daeyo": {
+  "text": "대요",
+  "reg": "stim"
+ },
  "ssal": {
   "text": "쌀",
   "reg": "stim"
@@ -301,6 +341,10 @@
  },
  "p-half": {
   "text": "벌써 절반 했어요! 조금만 더 해 봐요.",
+  "reg": "talk"
+ },
+ "p-break": {
+  "text": "잘하고 있어요! 조금 쉬었다가 계속해요.",
   "reg": "talk"
  },
  "p-done": {

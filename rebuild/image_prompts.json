@@ -255,6 +255,46 @@
   "word": "당구",
   "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a billiard table with colorful balls and a cue stick"
  },
+ "juk": {
+  "word": "죽",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a bowl of Korean rice porridge (juk) with a spoon, steam rising"
+ },
+ "duk": {
+  "word": "둑",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a grassy river embankment (levee) with a path on top, river beside it, daytime"
+ },
+ "jollyeoyo": {
+  "word": "졸려요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a sleepy young child yawning and rubbing eyes, sitting up"
+ },
+ "dollyeoyo": {
+  "word": "돌려요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child's hand turning a round door knob, close-up"
+ },
+ "jobayo": {
+  "word": "좁아요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a very narrow alley between two tall walls, a child squeezing through sideways"
+ },
+ "dobayo": {
+  "word": "돕아요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child helping another child stand up by holding hands, both smiling"
+ },
+ "jwoyo": {
+  "word": "줘요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child handing a red apple to another person, giving gesture, both hands visible"
+ },
+ "dwoyo": {
+  "word": "둬요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child's hand placing a cup down onto a table, close-up of the moment of setting it down"
+ },
+ "jaeyo": {
+  "word": "재요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child measuring a pencil with a wooden ruler on a desk"
+ },
+ "daeyo": {
+  "word": "대요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child's palm pressed flat against a white wall, touching it, close-up"
+ },
  "ssal": {
   "word": "쌀",
   "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a pile of uncooked white rice grains"

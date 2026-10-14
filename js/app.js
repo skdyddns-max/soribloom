@@ -73,7 +73,7 @@
     return `<img src="img/${d.img}.jpg?${V}" alt="${w}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${d.emoji}'}))">`;
   }
   function jamoHTML(w, pair) {
-    const [dk, di] = diffPos(pair), multi = w.length > 1;
+    const inPair = w === pair.a || w === pair.b; const [dk, di] = inPair ? diffPos(pair) : [-1, -1], multi = w.length > 1;
     return '<div class="jamo">' + [...w].map((ch, k) => {
       const j = JAMO(ch);
       return '<span class="syl">' + j.map((c, i) => {
@@ -116,7 +116,14 @@
     const it = items[idx], pair = pairById[it.pair]; busy = true;
     $('#hint').textContent = ''; $('#hint').className = 'hint';
     const right = it.left === pair.a ? pair.b : pair.a;
-    $('#choices').innerHTML = choiceHTML(it.left, pair) + choiceHTML(right, pair);
+    let ws = [it.left, right];
+    if (+config.choices === 3) {
+      const others = config.pairs.filter(id => id !== it.pair).flatMap(id => [pairById[id].a, pairById[id].b]).filter(w => w !== pair.a && w !== pair.b);
+      const foil = others.length ? others[Math.floor(Math.random() * others.length)] : null;
+      if (foil) { ws.splice(Math.floor(Math.random() * 3), 0, foil); it.foil = foil; }
+    }
+    $('#choices').classList.toggle('three', ws.length === 3);
+    $('#choices').innerHTML = ws.map(w => choiceHTML(w, pair)).join('');
     $('#counter').textContent = `${idx + 1} / ${items.length}`;
     renderProgress();
     document.querySelectorAll('.choice').forEach(b => b.addEventListener('click', () => answer(b)));
@@ -164,15 +171,16 @@
   async function next() {
     idx++;
     if (idx >= items.length) return finish();
-    if (items.length >= 30 && idx === Math.floor(items.length / 2)) await halfBreak();
+    if (items.length >= 30 && idx % 20 === 0 && idx < items.length) await halfBreak(idx * 2 === items.length);
     trial();
   }
-  function halfBreak() {
+  function halfBreak(isHalf) {
     return new Promise(res => {
       renderProgress(); $('#choices').innerHTML = ''; $('#hint').textContent = '';
       $('#break').classList.remove('hidden'); $('#speaker').classList.add('hidden');
+      $('#break-title').textContent = isHalf ? '벌써 절반 했어요!' : '잘하고 있어요!';
       $('#break-score').textContent = `지금까지 ${log.filter(r => r.first).length} / ${idx} 맞혔어요`;
-      play(PH.half.file);
+      play(isHalf ? PH.half.file : PH.rest.file);
       $('#btn-continue').onclick = () => { $('#break').classList.add('hidden'); $('#speaker').classList.remove('hidden'); res(); };
     });
   }
@@ -182,7 +190,7 @@
     const byPair = {};
     log.forEach(r => { const b = byPair[r.pair] || (byPair[r.pair] = { n: 0, first: 0, second: 0 }); b.n++; if (r.first) b.first++; else if (r.second) b.second++; });
     const first = log.filter(r => r.first).length, second = log.filter(r => !r.first && r.second).length;
-    return { code: config.code, nick: config.nick || '', at: new Date().toISOString(), n: log.length, first, second, pct: Math.round(first / log.length * 100), items: log, byPair, ver: (typeof SB_VER !== 'undefined' ? SB_VER : '1') };
+    return { code: config.code, nick: config.nick || '', at: new Date().toISOString(), n: log.length, choices: +config.choices === 3 ? 3 : 2, first, second, pct: Math.round(first / log.length * 100), items: log, byPair, ver: (typeof SB_VER !== 'undefined' ? SB_VER : '1') };
   }
   async function finish() {
     const s = summarize(); show('end');
@@ -194,6 +202,7 @@
       return `<tr><td>${p.a} / ${p.b}</td><td class="num">${b.first}${b.second ? `<span class="muted"> (+${b.second})</span>` : ''} / ${b.n}</td><td style="width:38%"><div class="bar ${pct < 60 ? 'low' : ''}"><b style="width:${pct}%"></b></div></td></tr>`;
     }).join('');
     play(PH.done.file);
+    renderTrend(s);
     if (config.demo) { $('#sync').innerHTML = '<div class="notice">체험 모드예요. 선생님이 만든 링크로 열면 결과가 자동 전송돼요.</div>'; return; }
     $('#sync').innerHTML = '<div class="notice">결과 전송 중…</div>';
     const r = await SBStore.saveResult(s);
@@ -207,6 +216,16 @@
     };
   }
 
+  async function renderTrend(s) {
+    const box = $('#trend-end'); box.innerHTML = '';
+    let prev = SBStore.localHistory(config.code).filter(h => h.at !== s.at);
+    if (!config.demo) { try { const r = await SBStore.listResults(config.code); if (r.online) prev = r.results.filter(h => h.at !== s.at); } catch {} }
+    const hist = [...prev].sort((a, b) => a.at < b.at ? -1 : 1).slice(-9).concat([s]);
+    if (hist.length < 2) return;
+    const last = hist[hist.length - 2]; const diff = s.pct - last.pct;
+    const msg = diff > 0 ? `지난번보다 ${diff}%p 올랐어요 📈` : diff < 0 ? `지난번보다 ${-diff}%p 내려갔어요. 괜찮아요, 다음에 또 해 봐요` : '지난번과 같아요. 꾸준히 잘하고 있어요';
+    box.innerHTML = `<h3 style="margin-top:14px">지금까지의 연습</h3><div class="trend">${hist.map(h => `<div class="tcol"><span class="tv">${h.pct}</span><b class="${h.pct < 60 ? 'low' : ''}${h === s ? ' now' : ''}" style="height:${Math.max(6, h.pct)}%"></b><span class="td">${new Date(h.at).getMonth() + 1}/${new Date(h.at).getDate()}</span></div>`).join('')}</div><p style="text-align:center;font-weight:700;margin-top:8px">${msg}</p>`;
+  }
   function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('on'); setTimeout(() => t.classList.remove('on'), 1800); }
 
   /* ---------- 시작 화면 ---------- */

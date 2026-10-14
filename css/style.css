@@ -95,6 +95,12 @@ input[type=text], input[type=password], input[type=number], select {
 @keyframes pulse { to { transform: scale(1.18); } }
 
 .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.choices.three { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.choices.three .choice { padding: 8px 4px 10px; border-width: 3px; }
+.choices.three .choice .word { font-size: 28px; }
+.choices.three .choice .word.long { font-size: 20px; }
+.choices.three .choice .pic { font-size: 48px; }
+.choices.three .choice .jamo i { min-width: 22px; height: 26px; line-height: 22px; font-size: 15px; padding: 0 3px; }
 .choice {
   background: var(--paper); border-radius: var(--r-lg); padding: 12px 10px 14px; box-shadow: var(--shadow); text-align: center;
   border: 4px solid transparent; transition: transform .12s var(--ease), box-shadow .12s var(--ease), border-color .2s;
@@ -156,9 +162,14 @@ table.pairs td.num { text-align: right; font-variant-numeric: tabular-nums; }
 .sessions { display: flex; flex-direction: column; gap: 6px; }
 .session { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; padding: 10px 12px; background: var(--white); border-radius: 12px; border: 1px solid var(--line); font-size: 15px; }
 .session .pct { font-weight: 800; color: var(--house); font-variant-numeric: tabular-nums; }
-.trend { display: flex; align-items: flex-end; gap: 4px; height: 90px; padding: 8px; background: var(--paper); border-radius: 12px; }
+.trend { display: flex; align-items: flex-end; gap: 4px; height: 110px; padding: 8px; background: var(--paper); border-radius: 12px; }
 .trend b { flex: 1; background: var(--green); border-radius: 4px 4px 0 0; min-width: 6px; position: relative; }
 .trend b.low { background: var(--coral); }
+.trend .tcol { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 2px; }
+.trend .tcol b { width: 70%; min-height: 4px; }
+.trend .tcol b.now { outline: 3px solid var(--house); outline-offset: 1px; }
+.trend .tv { font-size: 11px; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+.trend .td { font-size: 10px; color: var(--ink-muted); }
 .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--house); color: var(--paper); padding: 10px 18px; border-radius: 999px; font-size: 15px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 9; }
 .toast.on { opacity: 1; }
 .notice { background: var(--warn-wash); color: var(--warn-ink); border-radius: 12px; padding: 10px 14px; font-size: 14px; }

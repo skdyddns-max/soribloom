@@ -64,7 +64,7 @@
   function count() { const n = selected().length; $('#selcount').textContent = n ? `선택된 대립쌍 ${n}개` : '대립쌍을 1개 이상 선택해 주세요.'; }
   function fillForm(c) {
     editing = c || null; $('#formtitle').textContent = c ? `목표 수정 · ${c.nick}` : '새 아동';
-    $('#nick').value = c?.nick || ''; $('#n').value = c?.n || 10; $('#retry').checked = c ? !!c.retry : true;
+    $('#nick').value = c?.nick || ''; $('#n').value = c?.n || 10; $('#retry').checked = c ? !!c.retry : true; $('#choices').value = c && +c.choices === 3 ? '3' : '2';
     $('#showText').checked = c ? c.showText !== false : true; $('#showJamo').checked = c ? c.showJamo !== false : true;
     const set = new Set(c?.pairs || []); $$('.pchk').forEach(p => p.checked = set.has(p.value));
     $$('.gchk').forEach(g => g.checked = $$(`.pchk[data-g="${g.dataset.g}"]`).every(x => x.checked));
@@ -73,7 +73,7 @@
   async function save() {
     const pairs = selected(); if (!pairs.length) { toast('대립쌍을 선택해 주세요'); return; }
     const nick = $('#nick').value.trim(); if (!nick) { toast('별칭을 입력해 주세요'); $('#nick').focus(); return; }
-    const c = { ...(editing || { code: genCode(), created: Date.now() }), nick, pairs, n: +$('#n').value, retry: $('#retry').checked, showText: $('#showText').checked, showJamo: $('#showJamo').checked, updated: Date.now() };
+    const c = { ...(editing || { code: genCode(), created: Date.now() }), nick, pairs, n: +$('#n').value, choices: +$('#choices').value, retry: $('#retry').checked, showText: $('#showText').checked, showJamo: $('#showJamo').checked, updated: Date.now() };
     $('#save').disabled = true; const r = await SBStore.saveChild(c); $('#save').disabled = false;
     toast(r.online ? '저장했어요' : '이 브라우저에 저장했어요(서버 미연결)');
     await loadList(); openDetail(c.code);
@@ -84,7 +84,7 @@
     current = children.find(c => c.code === code) || await SBStore.getChild(code); if (!current) return;
     showTab('detail');
     $('#d-title').textContent = `${current.nick} · ${current.code}`;
-    $('#d-meta').textContent = `${current.n}문항/세트 · 재시도 ${current.retry ? '켬' : '끔'} · 글자 ${current.showText === false ? '숨김' : '표시'} · 만든 날 ${new Date(current.created).toLocaleDateString('ko-KR')}`;
+    $('#d-meta').textContent = `${current.n}문항/세트 · ${+current.choices === 3 ? '3택1' : '2택1'} · 재시도 ${current.retry ? '켬' : '끔'} · 글자 ${current.showText === false ? '숨김' : '표시'} · 만든 날 ${new Date(current.created).toLocaleDateString('ko-KR')}`;
     $('#d-targets').innerHTML = current.pairs.map(id => `<span class="chip wash">${pairById[id].a}/${pairById[id].b}</span>`).join('');
     const link = SBStore.childLink(current); $('#d-link').value = link;
     $('#qr').innerHTML = ''; if (window.qrcode) { try { const q = qrcode(0, 'M'); q.addData(link); q.make(); $('#qr').innerHTML = q.createSvgTag({ cellSize: 3, margin: 3, scalable: true }); $('#qr svg').style.width = '200px'; } catch (e) { $('#qr').innerHTML = '<p class="muted">QR을 만들 수 없어요(링크가 너무 길어요)</p>'; } }
@@ -110,7 +110,7 @@
     }).join('');
     $('#d-sessions').innerHTML = rs.map(s => {
       const worst = Object.entries(s.byPair || {}).filter(([, b]) => b.first < b.n).map(([id, b]) => `${pairById[id]?.a}/${pairById[id]?.b} ${b.first}/${b.n}`).join(', ');
-      return `<div class="session"><span class="muted">${fmtDate(s.at)}</span><span>${s.first}/${s.n}${s.second ? ` <span class="muted">(+${s.second} 재시도)</span>` : ''}${worst ? `<br><span class="muted" style="font-size:13px">틀린 쌍: ${worst}</span>` : ''}</span><span class="pct">${s.pct}%</span></div>`;
+      return `<div class="session"><span class="muted">${fmtDate(s.at)}${s.choices === 3 ? '<br><span class="chip warn" style="min-height:22px;font-size:12px">3택1</span>' : ''}</span><span>${s.first}/${s.n}${s.second ? ` <span class="muted">(+${s.second} 재시도)</span>` : ''}${worst ? `<br><span class="muted" style="font-size:13px">틀린 쌍: ${worst}</span>` : ''}</span><span class="pct">${s.pct}%</span></div>`;
     }).join('');
   }
 
