@@ -295,6 +295,18 @@
   "word": "대요",
   "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child's palm pressed flat against a white wall, touching it, close-up"
  },
+ "byeol": {
+  "word": "별",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a single bright five-pointed golden star ornament"
+ },
+ "namu": {
+  "word": "나무",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a single leafy green tree with a brown trunk, full view"
+ },
+ "namul": {
+  "word": "나물",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a small white dish of Korean seasoned spinach namul with sesame seeds"
+ },
  "ssal": {
   "word": "쌀",
   "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a pile of uncooked white rice grains"

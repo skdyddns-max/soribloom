@@ -315,6 +315,22 @@
   "text": "대요",
   "reg": "stim"
  },
+ "il": {
+  "text": "일",
+  "reg": "stim"
+ },
+ "byeol": {
+  "text": "별",
+  "reg": "stim"
+ },
+ "namu": {
+  "text": "나무",
+  "reg": "stim"
+ },
+ "namul": {
+  "text": "나물",
+  "reg": "stim"
+ },
  "ssal": {
   "text": "쌀",
   "reg": "stim"
