@@ -307,6 +307,54 @@
   "word": "나물",
   "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a small white dish of Korean seasoned spinach namul with sesame seeds"
  },
+ "baechu": {
+  "word": "배추",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: one whole fresh Korean napa cabbage"
+ },
+ "kokkiri": {
+  "word": "코끼리",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a gray elephant standing, full body, side view"
+ },
+ "sobangcha": {
+  "word": "소방차",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a red fire truck, side view, full vehicle"
+ },
+ "sagwa": {
+  "word": "사과",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: one shiny red apple with a small leaf"
+ },
+ "ori": {
+  "word": "오리",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a white duck standing, full body"
+ },
+ "ibul": {
+  "word": "이불",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a neatly folded thick soft quilted blanket in pastel blue"
+ },
+ "mujigae": {
+  "word": "무지개",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a bright full rainbow arching over green hills under a blue sky"
+ },
+ "bihaenggi": {
+  "word": "비행기",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a white passenger airplane flying in a clear blue sky"
+ },
+ "ki": {
+  "word": "키",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a young child standing against a wall height chart, a hand on top of the head measuring height"
+ },
+ "bam": {
+  "word": "밤",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a few brown Korean chestnuts, one still in its spiky green husk"
+ },
+ "jim": {
+  "word": "짐",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a pile of travel luggage: a rolling suitcase with a duffel bag on top"
+ },
+ "jip": {
+  "word": "집",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a small cozy house with a red roof, a door and two windows"
+ },
  "ssal": {
   "word": "쌀",
   "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a pile of uncooked white rice grains"

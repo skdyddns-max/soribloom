@@ -3,7 +3,7 @@
   const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
   const PAIRS = window.SB_PAIRS, GROUPS = window.SB_GROUPS;
   const pairById = Object.fromEntries(PAIRS.map(p => [p.id, p]));
-  const groupLabel = Object.fromEntries([...GROUPS.jong, ...GROUPS.cho].map(g => [g.id, g.label]));
+  const groupLabel = Object.fromEntries([...GROUPS.syl, ...GROUPS.jong, ...GROUPS.cho].map(g => [g.id, g.label]));
   let children = [], current = null, editing = null;
 
   function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('on'); setTimeout(() => t.classList.remove('on'), 1800); }
@@ -53,10 +53,10 @@
       const ps = PAIRS.filter(p => p.group === g.id);
       return `<div class="group-box" data-g="${g.id}">
         <label class="chk"><input type="checkbox" class="gchk" data-g="${g.id}"><span><b>${g.label}</b><br><span class="desc">${g.desc}</span></span></label>
-        <div class="pairs">${ps.map(p => `<label><input type="checkbox" class="pchk" data-g="${g.id}" value="${p.id}">${p.a}/${p.b}</label>`).join('')}</div>
+        <div class="pairs">${ps.map(p => `<label><input type="checkbox" class="pchk" data-g="${g.id}" value="${p.id}">${SB_PAIR_LABEL(p)}</label>`).join('')}</div>
       </div>`;
     }).join('');
-    $('#groups-jong').innerHTML = box('jong'); $('#groups-cho').innerHTML = box('cho');
+    $('#groups-syl').innerHTML = box('syl'); $('#groups-jong').innerHTML = box('jong'); $('#groups-cho').innerHTML = box('cho');
     $$('.gchk').forEach(g => g.onchange = () => { $$(`.pchk[data-g="${g.dataset.g}"]`).forEach(p => p.checked = g.checked); count(); });
     $$('.pchk').forEach(p => p.onchange = () => { const g = p.dataset.g; $(`.gchk[data-g="${g}"]`).checked = $$(`.pchk[data-g="${g}"]`).every(x => x.checked); count(); });
   }
@@ -85,7 +85,7 @@
     showTab('detail');
     $('#d-title').textContent = `${current.nick} · ${current.code}`;
     $('#d-meta').textContent = `${current.n}문항/세트 · ${+current.choices === 3 ? '3택1' : '2택1'} · 재시도 ${current.retry ? '켬' : '끔'} · 글자 ${current.showText === false ? '숨김' : '표시'} · 만든 날 ${new Date(current.created).toLocaleDateString('ko-KR')}`;
-    $('#d-targets').innerHTML = current.pairs.map(id => `<span class="chip wash">${pairById[id].a}/${pairById[id].b}</span>`).join('');
+    $('#d-targets').innerHTML = current.pairs.map(id => `<span class="chip wash">${SB_PAIR_LABEL(pairById[id])}</span>`).join('');
     const link = SBStore.childLink(current); $('#d-link').value = link;
     $('#qr').innerHTML = ''; if (window.qrcode) { try { const q = qrcode(0, 'M'); q.addData(link); q.make(); $('#qr').innerHTML = q.createSvgTag({ cellSize: 3, margin: 3, scalable: true }); $('#qr svg').style.width = '200px'; } catch (e) { $('#qr').innerHTML = '<p class="muted">QR을 만들 수 없어요(링크가 너무 길어요)</p>'; } }
     $('#copy').onclick = () => navigator.clipboard.writeText(link).then(() => toast('링크를 복사했어요'));
@@ -106,10 +106,10 @@
     const agg = {}; rs.forEach(s => Object.entries(s.byPair || {}).forEach(([id, b]) => { const a = agg[id] || (agg[id] = { n: 0, first: 0 }); a.n += b.n; a.first += b.first; }));
     $('#d-pairs').innerHTML = '<tr><th>대립쌍</th><th>맞힘</th><th>정확도</th></tr>' + Object.entries(agg).sort((a, b) => (a[1].first / a[1].n) - (b[1].first / b[1].n)).map(([id, a]) => {
       const p = pairById[id] || { a: id, b: '' }, pct = Math.round(a.first / a.n * 100);
-      return `<tr><td>${p.a}/${p.b} <span class="muted">${groupLabel[p.group]?.split(' ')[0] || ''}</span></td><td class="num">${a.first}/${a.n}</td><td style="width:40%"><div class="row" style="gap:6px"><div class="bar ${pct < 60 ? 'low' : ''}" style="flex:1"><b style="width:${pct}%"></b></div><span class="num" style="min-width:38px;text-align:right">${pct}%</span></div></td></tr>`;
+      return `<tr><td>${SB_PAIR_LABEL(p)} <span class="muted">${groupLabel[p.group]?.split(' ')[0] || ''}</span></td><td class="num">${a.first}/${a.n}</td><td style="width:40%"><div class="row" style="gap:6px"><div class="bar ${pct < 60 ? 'low' : ''}" style="flex:1"><b style="width:${pct}%"></b></div><span class="num" style="min-width:38px;text-align:right">${pct}%</span></div></td></tr>`;
     }).join('');
     $('#d-sessions').innerHTML = rs.map(s => {
-      const worst = Object.entries(s.byPair || {}).filter(([, b]) => b.first < b.n).map(([id, b]) => `${pairById[id]?.a}/${pairById[id]?.b} ${b.first}/${b.n}`).join(', ');
+      const worst = Object.entries(s.byPair || {}).filter(([, b]) => b.first < b.n).map(([id, b]) => `${SB_PAIR_LABEL(pairById[id])} ${b.first}/${b.n}`).join(', ');
       return `<div class="session"><span class="muted">${fmtDate(s.at)}${s.choices === 3 ? '<br><span class="chip warn" style="min-height:22px;font-size:12px">3택1</span>' : ''}</span><span>${s.first}/${s.n}${s.second ? ` <span class="muted">(+${s.second} 재시도)</span>` : ''}${worst ? `<br><span class="muted" style="font-size:13px">틀린 쌍: ${worst}</span>` : ''}</span><span class="pct">${s.pct}%</span></div>`;
     }).join('');
   }

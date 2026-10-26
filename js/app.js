@@ -48,7 +48,8 @@
       if (items.length && round.length > 1 && round[0] === items[items.length - 1].pair) [round[0], round[1]] = [round[1], round[0]];
       for (const id of round) {
         const p = pairById[id]; const target = side[id] ? p.a : p.b; side[id] = !side[id]; left[id]--;
-        const it = { pair: id, target, other: target === p.a ? p.b : p.a, left: Math.random() < .5 ? p.a : p.b };
+        const it = p.count ? { pair: id, word: p.a, target: String([...p.a].length), count: true }
+          : { pair: id, target, other: target === p.a ? p.b : p.a, left: Math.random() < .5 ? p.a : p.b };
         if (items.length && items[items.length - 1].pair === id) {   // 마지막 바퀴에 한 쌍만 남은 경우: 앞쪽 빈자리에 끼워 넣기
           let j = items.length - 1; while (j > 0 && (items[j].pair === id || items[j - 1].pair === id)) j--;
           items.splice(j, 0, it);
@@ -73,6 +74,10 @@
     return `<img src="img/${d.img}.jpg?${V}" alt="${w}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${d.emoji}'}))">`;
   }
   function jamoHTML(w, pair) {
+    if (pair.kind === 'syl' && (pair.group === 'big' || pair.a.length !== pair.b.length)) {   // 낱말·길이 변별: 음절(글자) 칩, 음절 수 변별은 더 긴 부분 강조
+      const m = Math.min(pair.a.length, pair.b.length);
+      return '<div class="jamo">' + [...w].map((ch, k) => `<i class="${pair.group === 'len' && k >= m ? 'hl' : ''}">${ch}</i>`).join('') + '</div>';
+    }
     const inPair = w === pair.a || w === pair.b; const [dk, di] = inPair ? diffPos(pair) : [-1, -1], multi = w.length > 1;
     return '<div class="jamo">' + [...w].map((ch, k) => {
       const j = JAMO(ch);
@@ -107,18 +112,45 @@
     }).join('');
   }
   async function startSet() {
-    unlockAudio(); items = buildItems(); idx = 0; log = [];
+    unlockAudio(); items = buildItems(); idx = 0; log = []; countIntro = false;
     show('play'); renderProgress();
     await play(PH.intro.file); await wait(200);
     trial();
   }
+  let countIntro = false;
+  function countHTML(it) {
+    const w = it.word, max = Math.max(3, ...items.filter(x => x.count).map(x => +x.target));
+    const target = `<div class="count-target"><div class="pic">${picHTML(w)}</div>${config.showText ? `<div class="word${w.length > 1 ? ' long' : ''}">${w}</div>` : ''}<div class="claps" id="claps"></div></div>`;
+    const opts = Array.from({ length: max }, (_, i) => i + 1).map(n =>
+      `<button class="choice cnt" data-w="${n}" aria-label="${n}번"><div class="dots">${'<i></i>'.repeat(n)}</div><div class="cnum">${n}번</div></button>`).join('');
+    return target + opts;
+  }
+  async function clapModel(it) {   // 끊어 읽기 음성에 맞춰 손뼉 표시
+    const box = $('#claps'); if (!box) return; box.innerHTML = '';
+    const n = +it.target, a = audio(SB_SEG(it.word));
+    const dur = isFinite(a.duration) && a.duration > 0 ? a.duration : n * 0.7;
+    const timers = Array.from({ length: n }, (_, i) => setTimeout(() => box.insertAdjacentHTML('beforeend', '<span>👏</span>'), (i + 0.15) * dur / n * 1000));
+    await play(SB_SEG(it.word)); timers.forEach(clearTimeout);
+    box.innerHTML = '<span>👏</span>'.repeat(n);
+  }
   async function trial() {
     const it = items[idx], pair = pairById[it.pair]; busy = true;
     $('#hint').textContent = ''; $('#hint').className = 'hint';
+    if (it.count) {
+      $('#choices').className = 'choices count';
+      $('#choices').innerHTML = countHTML(it);
+      $('#counter').textContent = `${idx + 1} / ${items.length}`;
+      renderProgress();
+      document.querySelectorAll('.choice').forEach(b => b.addEventListener('click', () => answer(b)));
+      if (!countIntro) { countIntro = true; await wait(300); await play(PH.count.file); }
+      $('#hint').textContent = '손뼉 몇 번일까요?';
+      await wait(350); await sayTarget(); busy = false; t0 = Date.now(); return;
+    }
+    $('#choices').className = 'choices';
     const right = it.left === pair.a ? pair.b : pair.a;
     let ws = [it.left, right];
     if (+config.choices === 3) {
-      const others = config.pairs.filter(id => id !== it.pair).flatMap(id => [pairById[id].a, pairById[id].b]).filter(w => w !== pair.a && w !== pair.b);
+      const others = [...new Set(config.pairs.filter(id => id !== it.pair).flatMap(id => [pairById[id].a, pairById[id].b]))].filter(w => w !== pair.a && w !== pair.b);
       const foil = others.length ? others[Math.floor(Math.random() * others.length)] : null;
       if (foil) { ws.splice(Math.floor(Math.random() * 3), 0, foil); it.foil = foil; }
     }
@@ -131,7 +163,7 @@
   }
   async function sayTarget() {
     const it = items[idx]; const sp = $('#speaker'); sp.classList.add('playing');
-    await play(W[it.target].img); sp.classList.remove('playing');
+    await play(W[it.count ? it.word : it.target].img); sp.classList.remove('playing');
   }
   let attempt = 0;
   async function answer(btn) {
@@ -151,8 +183,13 @@
       attempt = 1; log[idx] = { pair: it.pair, target: it.target, first: false, second: null, rt, firstPick: w };
       $('#hint').textContent = '다시 한번 들어 볼까요?'; $('#hint').className = 'hint bad';
       await play(PH.retry.file); await wait(200);
-      // 두 단어를 차례로 들려주며 카드 강조
       btn.classList.remove('wrong');
+      if (it.count) {
+        await play(PH.clap.file); await wait(150); await clapModel(it); await wait(400);
+        $('#hint').textContent = '이번엔 손뼉 몇 번일까요?'; $('#hint').className = 'hint';
+        await sayTarget(); cards.forEach(c => c.classList.remove('locked')); busy = false; t0 = Date.now(); return;
+      }
+      // 두 단어를 차례로 들려주며 카드 강조
       for (const c of cards) {
         c.classList.add('listen'); await play(W[c.dataset.w].img); await wait(350); c.classList.remove('listen');
       }
@@ -164,8 +201,10 @@
     if (attempt === 0) log[idx] = { pair: it.pair, target: it.target, first: false, second: null, rt, firstPick: w };
     else log[idx].second = false;
     const good = cards.find(c => c.dataset.w === it.target); good.classList.add('correct'); btn.classList.add('dim');
-    $('#hint').textContent = `정답은 '${it.target}'이에요`; $('#hint').className = 'hint';
-    renderProgress(); await play(PH.reveal.file); await wait(150); await play(W[it.target].img); await wait(500);
+    $('#hint').textContent = it.count ? `정답은 ${it.target}번이에요` : `정답은 '${it.target}'이에요`; $('#hint').className = 'hint';
+    renderProgress(); await play(PH.reveal.file); await wait(150);
+    if (it.count) await clapModel(it); else await play(W[it.target].img);
+    await wait(500);
     attempt = 0; next();
   }
   async function next() {
@@ -199,7 +238,7 @@
     $('#endmsg').textContent = s.pct >= 90 ? '정말 잘했어요! 소리를 아주 잘 구별했어요.' : s.pct >= 70 ? '잘했어요! 조금만 더 연습하면 완벽해요.' : '잘 듣고 있어요. 내일 또 해 봐요!';
     $('#pairtable').innerHTML = `<tr><th>대립쌍</th><th>맞힘</th><th>정확도</th></tr>` + Object.entries(s.byPair).map(([id, b]) => {
       const p = pairById[id], pct = Math.round(b.first / b.n * 100);
-      return `<tr><td>${p.a} / ${p.b}</td><td class="num">${b.first}${b.second ? `<span class="muted"> (+${b.second})</span>` : ''} / ${b.n}</td><td style="width:38%"><div class="bar ${pct < 60 ? 'low' : ''}"><b style="width:${pct}%"></b></div></td></tr>`;
+      return `<tr><td>${SB_PAIR_LABEL(p)}</td><td class="num">${b.first}${b.second ? `<span class="muted"> (+${b.second})</span>` : ''} / ${b.n}</td><td style="width:38%"><div class="bar ${pct < 60 ? 'low' : ''}"><b style="width:${pct}%"></b></div></td></tr>`;
     }).join('');
     play(PH.done.file);
     renderTrend(s);
@@ -211,7 +250,7 @@
       : `<div class="notice">📱 결과를 이 폰에 저장했어요. 인터넷이 연결되면 자동으로 전송돼요.${r.pending ? ` (대기 ${r.pending}건)` : ''}</div>`;
     $('#sync').insertAdjacentHTML('beforeend', `<div class="row center" style="margin-top:10px"><button class="btn ghost sm" id="copyres">결과 복사</button></div>`);
     $('#copyres').onclick = () => {
-      const txt = `[소리블룸] ${s.nick} ${new Date(s.at).toLocaleDateString('ko-KR')} — ${s.first}/${s.n} (${s.pct}%)\n` + Object.entries(s.byPair).map(([id, b]) => `${pairById[id].a}/${pairById[id].b} ${b.first}/${b.n}`).join(', ');
+      const txt = `[소리블룸] ${s.nick} ${new Date(s.at).toLocaleDateString('ko-KR')} — ${s.first}/${s.n} (${s.pct}%)\n` + Object.entries(s.byPair).map(([id, b]) => `${SB_PAIR_LABEL(pairById[id])} ${b.first}/${b.n}`).join(', ');
       navigator.clipboard?.writeText(txt).then(() => toast('복사했어요. 카톡으로 보내 주세요.'));
     };
   }
@@ -233,7 +272,7 @@
     const nick = config.nick ? `${config.nick}${/[가-힣]$/.test(config.nick) && (config.nick.charCodeAt(config.nick.length - 1) - 0xAC00) % 28 ? '아' : '야'}, ` : '';
     $('#greet').textContent = `${nick}잘 듣고 골라 보자!`;
     const groups = [...new Set(config.pairs.map(id => pairById[id].group))];
-    const labels = [...window.SB_GROUPS.jong, ...window.SB_GROUPS.cho].filter(g => groups.includes(g.id)).map(g => g.label);
+    const labels = [...window.SB_GROUPS.syl, ...window.SB_GROUPS.jong, ...window.SB_GROUPS.cho].filter(g => groups.includes(g.id)).map(g => g.label);
     $('#targets').innerHTML = labels.map(l => `<span class="chip wash">${l}</span>`).join(' ');
     $('#setinfo').textContent = `한 번에 ${config.n}문항 · 대립쌍 ${config.pairs.length}개`;
     const hist = SBStore.localHistory(config.code);

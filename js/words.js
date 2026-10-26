@@ -4,6 +4,12 @@
  * 각 단어: w(표기) · img(파일명, img/ 아래 png) · emoji(그림 없을 때 임시) · prompt(실사 이미지 생성 프롬프트)
  */
 window.SB_GROUPS = {
+  syl: [
+    { id: 'big', label: '낱말 변별 (소리가 많이 다른 말)', desc: '소/코끼리 · 배/비행기 · 코/무지개 · 비/소방차 · 사과/이불 · 오리/배추' },
+    { id: 'len', label: '음절 수 변별 (짧은 말 vs 긴 말)', desc: '배/배추 · 코/코끼리 · 소/소방차 · 사/사과 · 오/오리 · 이/이불 · 무/무지개 · 비/비행기' },
+    { id: 'cnt', label: '음절 세기 (손뼉 몇 번?)', desc: '1음절 소·배·코·비 · 2음절 사과·오리·배추·이불 · 3음절 코끼리·무지개·비행기·소방차' },
+    { id: 'vow', label: '모음 변별 (첫 소리 같고 모음만 다름)', desc: '소/새 · 비/배 · 코/키 · 이/오 · 사/소' },
+  ],
   jong: [
     { id: 'k',  label: 'ㄱ 받침', desc: '무/묵 · 구/국 · 새/색' },
     { id: 'n',  label: 'ㄴ 받침', desc: '소/손 · 사/산 · 무/문' },
@@ -13,7 +19,7 @@ window.SB_GROUPS = {
     { id: 'p',  label: 'ㅂ 받침', desc: '배/밥 · 이/입 · 사/삽' },
     { id: 'ng', label: 'ㅇ 받침', desc: '코/콩 · 사/상 · 벼/병' },
     { id: 'lc', label: 'ㄹ 받침 vs 다른 받침 (종성 간 대립)', desc: '물/문 · 굴/국 · 살/산·삼·삽 · 솔/손·솜·솥 · 팔/팥 · 별/병 · 일/입 · 달/담 · 발/밥 · 돌/돈 · 줄/죽 · 둘/둑 · 탈/탕' },
-    { id: 'cc', label: '받침끼리 대립 (ㄹ 제외)', desc: '산/삼/삽/상 · 손/솜/솥 · 밥/방 · 발/방 · 문/묵' },
+    { id: 'cc', label: '받침끼리 대립 (ㄹ 제외)', desc: '산/삼/삽/상 · 손/솜/솥 · 밥/방 · 발/방 · 문/묵 · 밤/밥 · 짐/집' },
   ],
   cho: [
     { id: 'front', label: '연구개음 전방화 (ㄱ·ㅋ → ㄷ·ㅌ)', desc: '굴/둘 · 감/담 · 콩/통 · 칼/탈' },
@@ -110,6 +116,18 @@ window.SB_WORDS = {
   '별': { img: 'byeol', emoji: '⭐', prompt: P + 'a single bright five-pointed golden star ornament' },
   '나무': { img: 'namu', emoji: '🌳', prompt: P + 'a single leafy green tree with a brown trunk, full view' },
   '나물': { img: 'namul', emoji: '🥗', prompt: P + 'a small white dish of Korean seasoned spinach namul with sesame seeds' },
+  '배추': { img: 'baechu', emoji: '🥬', prompt: P + 'one whole fresh Korean napa cabbage' },
+  '코끼리': { img: 'kokkiri', emoji: '🐘', prompt: P + 'a gray elephant standing, full body, side view' },
+  '소방차': { img: 'sobangcha', emoji: '🚒', prompt: P + 'a red fire truck, side view, full vehicle' },
+  '사과': { img: 'sagwa', emoji: '🍎', prompt: P + 'one shiny red apple with a small leaf' },
+  '오리': { img: 'ori', emoji: '🦆', prompt: P + 'a white duck standing, full body' },
+  '이불': { img: 'ibul', emoji: '🛌', prompt: P + 'a neatly folded thick soft quilted blanket in pastel blue' },
+  '무지개': { img: 'mujigae', emoji: '🌈', prompt: P + 'a bright full rainbow arching over green hills under a blue sky' },
+  '비행기': { img: 'bihaenggi', emoji: '✈️', prompt: P + 'a white passenger airplane flying in a clear blue sky' },
+  '키': { img: 'ki', emoji: '📏', prompt: P + 'a young child standing against a wall height chart, a hand on top of the head measuring height' },
+  '밤': { img: 'bam', emoji: '🌰', prompt: P + 'a few brown Korean chestnuts, one still in its spiky green husk' },
+  '짐': { img: 'jim', emoji: '🧳', prompt: P + 'a pile of travel luggage: a rolling suitcase with a duffel bag on top' },
+  '집': { img: 'jip', emoji: '🏠', prompt: P + 'a small cozy house with a red roof, a door and two windows' },
   '쌀': { img: 'ssal',  emoji: '🌾', prompt: P + 'a pile of uncooked white rice grains' },
 };
 
@@ -164,6 +182,30 @@ window.SB_PAIRS = [
   { id: 'bap-bang', kind: 'jong', group: 'cc', a: '밥', b: '방' },
   { id: 'bal-bang', kind: 'jong', group: 'cc', a: '발', b: '방' },
   { id: 'mun-muk',  kind: 'jong', group: 'cc', a: '문', b: '묵' },
+  { id: 'bam-bap',  kind: 'jong', group: 'cc', a: '밤', b: '밥' },
+  { id: 'jim-jip',  kind: 'jong', group: 'cc', a: '짐', b: '집' },
+  // 초기 변별·음절
+  { id: 'so-kokkiri',   kind: 'syl', group: 'big', a: '소', b: '코끼리' },
+  { id: 'bae-bihaenggi',kind: 'syl', group: 'big', a: '배', b: '비행기' },
+  { id: 'ko-mujigae',   kind: 'syl', group: 'big', a: '코', b: '무지개' },
+  { id: 'bi-sobangcha', kind: 'syl', group: 'big', a: '비', b: '소방차' },
+  { id: 'sagwa-ibul',   kind: 'syl', group: 'big', a: '사과', b: '이불' },
+  { id: 'ori-baechu',   kind: 'syl', group: 'big', a: '오리', b: '배추' },
+  { id: 'bae-baechu',   kind: 'syl', group: 'len', a: '배', b: '배추' },
+  { id: 'ko-kokkiri',   kind: 'syl', group: 'len', a: '코', b: '코끼리' },
+  { id: 'so-sobangcha', kind: 'syl', group: 'len', a: '소', b: '소방차' },
+  { id: 'sa-sagwa',     kind: 'syl', group: 'len', a: '사', b: '사과' },
+  { id: 'o-ori',        kind: 'syl', group: 'len', a: '오', b: '오리' },
+  { id: 'i-ibul',       kind: 'syl', group: 'len', a: '이', b: '이불' },
+  { id: 'mu-mujigae',   kind: 'syl', group: 'len', a: '무', b: '무지개' },
+  { id: 'bi-bihaenggi', kind: 'syl', group: 'len', a: '비', b: '비행기' },
+  { id: 'so-sae',       kind: 'syl', group: 'vow', a: '소', b: '새' },
+  { id: 'bi-bae',       kind: 'syl', group: 'vow', a: '비', b: '배' },
+  { id: 'ko-ki',        kind: 'syl', group: 'vow', a: '코', b: '키' },
+  { id: 'i-o',          kind: 'syl', group: 'vow', a: '이', b: '오' },
+  { id: 'sa-so',        kind: 'syl', group: 'vow', a: '사', b: '소' },
+  // 음절 세기: a=b=단어, count 플래그(보기는 1·2·3번 손뼉)
+  ...['소','배','코','비','사과','오리','배추','이불','코끼리','무지개','비행기','소방차'].map(w => ({ id: 'cnt-' + w, kind: 'syl', group: 'cnt', a: w, b: w, count: true })),
   { id: 'bae-baem',kind: 'jong', group: 'm',  a: '배', b: '뱀' },
   { id: 'so-som',  kind: 'jong', group: 'm',  a: '소', b: '솜' },
   { id: 'sa-sam',  kind: 'jong', group: 'm',  a: '사', b: '삼' },
@@ -211,6 +253,8 @@ window.SB_PHRASES = {
   retry:   { file: 'p-retry',   text: '다시 한번 들어 볼까요?' },
   reveal:  { file: 'p-reveal',  text: '정답은 이거예요.' },
   half:    { file: 'p-half',    text: '벌써 절반 했어요! 조금만 더 해 봐요.' },
+  count:   { file: 'p-count',   text: '잘 듣고, 손뼉을 몇 번 치는 말인지 골라 보세요.' },
+  clap:    { file: 'p-clap',    text: '손뼉 치면서 같이 들어 봐요.' },
   rest:    { file: 'p-break',   text: '잘하고 있어요! 조금 쉬었다가 계속해요.' },
   done:    { file: 'p-done',    text: '다 했어요! 정말 잘했어요.' },
 };
@@ -227,3 +271,11 @@ window.SB_JAMO = (function () {
     return [CHO[cho], JUNG[jung], JONG[jong]];
   };
 })();
+
+/* 화면 표시용 쌍 이름 */
+window.SB_PAIR_LABEL = function (p) {
+  if (!p) return '?';
+  return p.count ? `${p.a} (${[...p.a].length}번)` : `${p.a}/${p.b}`;
+};
+/* 음절 세기용 끊어 읽기 음성 파일 이름 */
+window.SB_SEG = function (w) { return 'seg-' + window.SB_WORDS[w].img; };

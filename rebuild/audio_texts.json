@@ -331,6 +331,54 @@
   "text": "나물",
   "reg": "stim"
  },
+ "baechu": {
+  "text": "배추",
+  "reg": "stim"
+ },
+ "kokkiri": {
+  "text": "코끼리",
+  "reg": "stim"
+ },
+ "sobangcha": {
+  "text": "소방차",
+  "reg": "stim"
+ },
+ "sagwa": {
+  "text": "사과",
+  "reg": "stim"
+ },
+ "ori": {
+  "text": "오리",
+  "reg": "stim"
+ },
+ "ibul": {
+  "text": "이불",
+  "reg": "stim"
+ },
+ "mujigae": {
+  "text": "무지개",
+  "reg": "stim"
+ },
+ "bihaenggi": {
+  "text": "비행기",
+  "reg": "stim"
+ },
+ "ki": {
+  "text": "키",
+  "reg": "stim"
+ },
+ "bam": {
+  "text": "밤",
+  "reg": "stim"
+ },
+ "jim": {
+  "text": "짐",
+  "reg": "stim"
+ },
+ "jip": {
+  "text": "집",
+  "reg": "stim"
+ },
  "ssal": {
   "text": "쌀",
   "reg": "stim"
@@ -359,6 +407,14 @@
   "text": "벌써 절반 했어요! 조금만 더 해 봐요.",
   "reg": "talk"
  },
+ "p-count": {
+  "text": "잘 듣고, 손뼉을 몇 번 치는 말인지 골라 보세요.",
+  "reg": "talk"
+ },
+ "p-clap": {
+  "text": "손뼉 치면서 같이 들어 봐요.",
+  "reg": "talk"
+ },
  "p-break": {
   "text": "잘하고 있어요! 조금 쉬었다가 계속해요.",
   "reg": "talk"
@@ -366,5 +422,53 @@
  "p-done": {
   "text": "다 했어요! 정말 잘했어요.",
   "reg": "talk"
+ },
+ "seg-so": {
+  "text": "소.",
+  "reg": "stim"
+ },
+ "seg-bae": {
+  "text": "배.",
+  "reg": "stim"
+ },
+ "seg-ko": {
+  "text": "코.",
+  "reg": "stim"
+ },
+ "seg-bi": {
+  "text": "비.",
+  "reg": "stim"
+ },
+ "seg-sagwa": {
+  "text": "사. 과.",
+  "reg": "stim"
+ },
+ "seg-ori": {
+  "text": "오. 리.",
+  "reg": "stim"
+ },
+ "seg-baechu": {
+  "text": "배. 추.",
+  "reg": "stim"
+ },
+ "seg-ibul": {
+  "text": "이. 불.",
+  "reg": "stim"
+ },
+ "seg-kokkiri": {
+  "text": "코. 끼. 리.",
+  "reg": "stim"
+ },
+ "seg-mujigae": {
+  "text": "무. 지. 개.",
+  "reg": "stim"
+ },
+ "seg-bihaenggi": {
+  "text": "비. 행. 기.",
+  "reg": "stim"
+ },
+ "seg-sobangcha": {
+  "text": "소. 방. 차.",
+  "reg": "stim"
  }
 }
