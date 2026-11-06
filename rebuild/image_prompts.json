@@ -355,6 +355,74 @@
   "word": "집",
   "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a small cozy house with a red roof, a door and two windows"
  },
+ "jjim": {
+  "word": "찜",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a bowl of Korean braised short ribs (galbi-jjim) with carrots"
+ },
+ "chim": {
+  "word": "침",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a smiling baby with a little drool on the chin, close-up of the face"
+ },
+ "chip": {
+  "word": "칩",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a bowl of crispy potato chips"
+ },
+ "jayo": {
+  "word": "자요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child sleeping in bed hugging a teddy bear, eyes closed"
+ },
+ "jjayo": {
+  "word": "짜요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child making a funny face after tasting something too salty, holding a salt shaker"
+ },
+ "chayo": {
+  "word": "차요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child kicking a soccer ball, action shot, full body"
+ },
+ "chwoyo": {
+  "word": "춰요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child dancing happily with arms up, full body"
+ },
+ "jjyeoyo": {
+  "word": "쪄요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: dumplings steaming in a bamboo steamer with visible steam"
+ },
+ "chyeoyo": {
+  "word": "쳐요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child playing a small drum with drumsticks"
+ },
+ "juwoyo": {
+  "word": "주워요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child bending down to pick up a toy block from the floor"
+ },
+ "chuwoyo": {
+  "word": "추워요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child shivering in the cold wearing a scarf and hat, snowflakes falling"
+ },
+ "jiwoyo": {
+  "word": "지워요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child erasing a pencil drawing on paper with an eraser"
+ },
+ "chiwoyo": {
+  "word": "치워요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child tidying up toys into a toy box"
+ },
+ "jilleoyo": {
+  "word": "질러요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a child shouting loudly with both hands cupped around the mouth"
+ },
+ "jjilleoyo": {
+  "word": "찔러요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a hand poking a fork into a piece of cake, close-up"
+ },
+ "joayo": {
+  "word": "좋아요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a smiling child giving a big thumbs up"
+ },
+ "jjoayo": {
+  "word": "쪼아요",
+  "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a chicken pecking at grain on the ground"
+ },
  "ssal": {
   "word": "쌀",
   "prompt": "Realistic studio photograph, single subject centered, plain soft white background, bright even lighting, high detail, no text, no watermark, square 1:1: a pile of uncooked white rice grains"

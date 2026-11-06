@@ -27,6 +27,9 @@ window.SB_GROUPS = {
     { id: 'jd',    label: 'ㅈ / ㄷ 변별 (파찰음 파열음화)', desc: '줄/둘 · 잠/담 · 잼/댐 · 쥐/뒤 · 조끼/도끼 · 자리/다리 · 장구/당구' },
     { id: 'jd2',   label: 'ㅈ / ㄷ 심화 (동사·형용사·죽/둑)', desc: '졸려요/돌려요 · 좁아요/돕아요 · 줘요/둬요 · 재요/대요 · 죽/둑' },
     { id: 'affr',  label: 'ㅈ / ㅊ 대립', desc: '자/차 · 종/총' },
+    { id: 'jjc1',  label: 'ㅈ·ㅉ·ㅊ 1음절 (평음·경음·격음)', desc: '짐/찜/침 · 자/차 · 종/총 · 집/칩' },
+    { id: 'jjc2',  label: 'ㅈ·ㅉ·ㅊ 2음절', desc: '자요/짜요/차요 · 줘요/춰요 · 쪄요/쳐요' },
+    { id: 'jjc3',  label: 'ㅈ·ㅉ·ㅊ 3음절', desc: '주워요/추워요 · 지워요/치워요 · 질러요/찔러요 · 좋아요/쪼아요' },
     { id: 'asp',   label: '기식·긴장 대립', desc: '불/풀 · 발/팔 · 달/딸 · 굴/꿀 · 방/빵 · 살/쌀' },
   ],
 };
@@ -128,6 +131,23 @@ window.SB_WORDS = {
   '밤': { img: 'bam', emoji: '🌰', prompt: P + 'a few brown Korean chestnuts, one still in its spiky green husk' },
   '짐': { img: 'jim', emoji: '🧳', prompt: P + 'a pile of travel luggage: a rolling suitcase with a duffel bag on top' },
   '집': { img: 'jip', emoji: '🏠', prompt: P + 'a small cozy house with a red roof, a door and two windows' },
+  '찜': { img: 'jjim',  emoji: '🍲', prompt: P + 'a bowl of Korean braised short ribs (galbi-jjim) with carrots' },
+  '침': { img: 'chim',  emoji: '🤤', prompt: P + 'a smiling baby with a little drool on the chin, close-up of the face' },
+  '칩': { img: 'chip',  emoji: '🥔', prompt: P + 'a bowl of crispy potato chips' },
+  '자요': { img: 'jayo',   emoji: '😴', prompt: P + 'a child sleeping in bed hugging a teddy bear, eyes closed' },
+  '짜요': { img: 'jjayo',  emoji: '🧂', prompt: P + 'a child making a funny face after tasting something too salty, holding a salt shaker' },
+  '차요': { img: 'chayo',  emoji: '⚽', prompt: P + 'a child kicking a soccer ball, action shot, full body' },
+  '춰요': { img: 'chwoyo', emoji: '💃', prompt: P + 'a child dancing happily with arms up, full body' },
+  '쪄요': { img: 'jjyeoyo', emoji: '🥟', prompt: P + 'dumplings steaming in a bamboo steamer with visible steam' },
+  '쳐요': { img: 'chyeoyo', emoji: '🥁', prompt: P + 'a child playing a small drum with drumsticks' },
+  '주워요': { img: 'juwoyo', emoji: '🧸', prompt: P + 'a child bending down to pick up a toy block from the floor' },
+  '추워요': { img: 'chuwoyo', emoji: '🥶', prompt: P + 'a child shivering in the cold wearing a scarf and hat, snowflakes falling' },
+  '지워요': { img: 'jiwoyo', emoji: '✏️', prompt: P + 'a child erasing a pencil drawing on paper with an eraser' },
+  '치워요': { img: 'chiwoyo', emoji: '🧹', prompt: P + 'a child tidying up toys into a toy box' },
+  '질러요': { img: 'jilleoyo', emoji: '📣', prompt: P + 'a child shouting loudly with both hands cupped around the mouth' },
+  '찔러요': { img: 'jjilleoyo', emoji: '👉', prompt: P + 'a hand poking a fork into a piece of cake, close-up' },
+  '좋아요': { img: 'joayo', emoji: '👍', prompt: P + 'a smiling child giving a big thumbs up' },
+  '쪼아요': { img: 'jjoayo', emoji: '🐔', prompt: P + 'a chicken pecking at grain on the ground' },
   '쌀': { img: 'ssal',  emoji: '🌾', prompt: P + 'a pile of uncooked white rice grains' },
 };
 
@@ -235,6 +255,18 @@ window.SB_PAIRS = [
   { id: 'jobayo-dobayo', kind: 'cho', group: 'jd2', a: '좁아요', b: '돕아요' },
   { id: 'jwoyo-dwoyo',   kind: 'cho', group: 'jd2', a: '줘요', b: '둬요' },
   { id: 'jaeyo-daeyo',   kind: 'cho', group: 'jd2', a: '재요', b: '대요' },
+  // ㅈ·ㅉ·ㅊ 삼중 대립 (c가 있으면 세 그림 모두 보기)
+  { id: 'jim-jjim-chim', kind: 'cho', group: 'jjc1', a: '짐', b: '찜', c: '침' },
+  { id: 'ja-cha-1',      kind: 'cho', group: 'jjc1', a: '자', b: '차' },
+  { id: 'jong-chong-1',  kind: 'cho', group: 'jjc1', a: '종', b: '총' },
+  { id: 'jip-chip',      kind: 'cho', group: 'jjc1', a: '집', b: '칩' },
+  { id: 'jayo-jjayo-chayo', kind: 'cho', group: 'jjc2', a: '자요', b: '짜요', c: '차요' },
+  { id: 'jwoyo-chwoyo',  kind: 'cho', group: 'jjc2', a: '줘요', b: '춰요' },
+  { id: 'jjyeoyo-chyeoyo', kind: 'cho', group: 'jjc2', a: '쪄요', b: '쳐요' },
+  { id: 'juwoyo-chuwoyo', kind: 'cho', group: 'jjc3', a: '주워요', b: '추워요' },
+  { id: 'jiwoyo-chiwoyo', kind: 'cho', group: 'jjc3', a: '지워요', b: '치워요' },
+  { id: 'jilleoyo-jjilleoyo', kind: 'cho', group: 'jjc3', a: '질러요', b: '찔러요' },
+  { id: 'joayo-jjoayo',  kind: 'cho', group: 'jjc3', a: '좋아요', b: '쪼아요' },
   { id: 'ja-cha',   kind: 'cho', group: 'affr',  a: '자', b: '차' },
   { id: 'jong-chong',kind:'cho', group: 'affr',  a: '종', b: '총' },
   { id: 'bul-pul',  kind: 'cho', group: 'asp',   a: '불', b: '풀' },
@@ -275,7 +307,7 @@ window.SB_JAMO = (function () {
 /* 화면 표시용 쌍 이름 */
 window.SB_PAIR_LABEL = function (p) {
   if (!p) return '?';
-  return p.count ? `${p.a} (${[...p.a].length}번)` : `${p.a}/${p.b}`;
+  return p.count ? `${p.a} (${[...p.a].length}번)` : p.c ? `${p.a}/${p.b}/${p.c}` : `${p.a}/${p.b}`;
 };
 /* 음절 세기용 끊어 읽기 음성 파일 이름 */
 window.SB_SEG = function (w) { return 'seg-' + window.SB_WORDS[w].img; };

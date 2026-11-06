@@ -41,13 +41,13 @@
   function buildItems() {
     // 쌍을 한 바퀴씩 고르게 돈다(바퀴마다 순서 섞기, 같은 쌍 연속 금지). 쌍 안에서는 두 단어를 번갈아 목표로 삼아 균형을 맞춘다.
     const n = +config.n || 10; const ids = shuffle([...config.pairs]);
-    const left = {}, side = {}; ids.forEach((id, i) => { left[id] = Math.floor(n / ids.length) + (i < n % ids.length ? 1 : 0); side[id] = Math.random() < .5; });
+    const left = {}, side = {}; ids.forEach((id, i) => { left[id] = Math.floor(n / ids.length) + (i < n % ids.length ? 1 : 0); side[id] = Math.floor(Math.random() * 3); });
     const items = [];
     while (items.length < n) {
       const round = shuffle(ids.filter(id => left[id] > 0)); if (!round.length) break;
       if (items.length && round.length > 1 && round[0] === items[items.length - 1].pair) [round[0], round[1]] = [round[1], round[0]];
       for (const id of round) {
-        const p = pairById[id]; const target = side[id] ? p.a : p.b; side[id] = !side[id]; left[id]--;
+        const p = pairById[id]; const opts = p.c ? [p.a, p.b, p.c] : [p.a, p.b]; const target = opts[side[id] % opts.length]; side[id]++; left[id]--;
         const it = p.count ? { pair: id, word: p.a, target: String([...p.a].length), count: true }
           : { pair: id, target, other: target === p.a ? p.b : p.a, left: Math.random() < .5 ? p.a : p.b };
         if (items.length && items[items.length - 1].pair === id) {   // 마지막 바퀴에 한 쌍만 남은 경우: 앞쪽 빈자리에 끼워 넣기
@@ -61,9 +61,11 @@
 
   /* ---------- 렌더 ---------- */
   // 두 단어의 첫 차이 위치 [음절, 자모(0초성·1중성·2종성)]
-  function diffPos(pair) {
-    for (let k = 0; k < Math.max(pair.a.length, pair.b.length); k++) {
-      const a = JAMO(pair.a[k] || ' '), b = JAMO(pair.b[k] || ' ');
+  function diffPos(pair, w) {   // 다른 단어와의 첫 차이 위치 [음절, 자모]
+    const other = w && w !== pair.a ? pair.a : pair.b;
+    const x = w || pair.a;
+    for (let k = 0; k < Math.max(x.length, other.length); k++) {
+      const a = JAMO(x[k] || ' '), b = JAMO(other[k] || ' ');
       for (let i = 0; i < 3; i++) if (a[i] !== b[i]) return [k, i];
     }
     return [0, 2];
@@ -78,7 +80,7 @@
       const m = Math.min(pair.a.length, pair.b.length);
       return '<div class="jamo">' + [...w].map((ch, k) => `<i class="${pair.group === 'len' && k >= m ? 'hl' : ''}">${ch}</i>`).join('') + '</div>';
     }
-    const inPair = w === pair.a || w === pair.b; const [dk, di] = inPair ? diffPos(pair) : [-1, -1], multi = w.length > 1;
+    const inPair = w === pair.a || w === pair.b || w === pair.c; const [dk, di] = inPair ? diffPos(pair, w) : [-1, -1], multi = w.length > 1;
     return '<div class="jamo">' + [...w].map((ch, k) => {
       const j = JAMO(ch);
       return '<span class="syl">' + j.map((c, i) => {
@@ -148,9 +150,9 @@
     }
     $('#choices').className = 'choices';
     const right = it.left === pair.a ? pair.b : pair.a;
-    let ws = [it.left, right];
-    if (+config.choices === 3) {
-      const others = [...new Set(config.pairs.filter(id => id !== it.pair).flatMap(id => [pairById[id].a, pairById[id].b]))].filter(w => w !== pair.a && w !== pair.b);
+    let ws = pair.c ? shuffle([pair.a, pair.b, pair.c]) : [it.left, right];
+    if (!pair.c && +config.choices === 3) {
+      const others = [...new Set(config.pairs.filter(id => id !== it.pair).flatMap(id => [pairById[id].a, pairById[id].b, pairById[id].c].filter(Boolean)))].filter(w => w !== pair.a && w !== pair.b);
       const foil = others.length ? others[Math.floor(Math.random() * others.length)] : null;
       if (foil) { ws.splice(Math.floor(Math.random() * 3), 0, foil); it.foil = foil; }
     }

@@ -379,6 +379,74 @@
   "text": "집",
   "reg": "stim"
  },
+ "jjim": {
+  "text": "찜",
+  "reg": "stim"
+ },
+ "chim": {
+  "text": "침",
+  "reg": "stim"
+ },
+ "chip": {
+  "text": "칩",
+  "reg": "stim"
+ },
+ "jayo": {
+  "text": "자요",
+  "reg": "stim"
+ },
+ "jjayo": {
+  "text": "짜요",
+  "reg": "stim"
+ },
+ "chayo": {
+  "text": "차요",
+  "reg": "stim"
+ },
+ "chwoyo": {
+  "text": "춰요",
+  "reg": "stim"
+ },
+ "jjyeoyo": {
+  "text": "쪄요",
+  "reg": "stim"
+ },
+ "chyeoyo": {
+  "text": "쳐요",
+  "reg": "stim"
+ },
+ "juwoyo": {
+  "text": "주워요",
+  "reg": "stim"
+ },
+ "chuwoyo": {
+  "text": "추워요",
+  "reg": "stim"
+ },
+ "jiwoyo": {
+  "text": "지워요",
+  "reg": "stim"
+ },
+ "chiwoyo": {
+  "text": "치워요",
+  "reg": "stim"
+ },
+ "jilleoyo": {
+  "text": "질러요",
+  "reg": "stim"
+ },
+ "jjilleoyo": {
+  "text": "찔러요",
+  "reg": "stim"
+ },
+ "joayo": {
+  "text": "좋아요",
+  "reg": "stim"
+ },
+ "jjoayo": {
+  "text": "쪼아요",
+  "reg": "stim"
+ },
  "ssal": {
   "text": "쌀",
   "reg": "stim"
